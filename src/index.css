@@ -1,0 +1,51 @@
+#editorWrapper {
+  background: blue;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#previewWrapper {
+  max-width: 800px;
+  min-height: 200px;
+  margin: 20px auto;
+}
+
+#editorWrapper textarea, #previewWrapper {
+  background-color: #c0d8d8;
+  border: 1px solid #1d2f2f;
+  box-shadow: 1px 1px 10px 2px #3a5f5f;
+  border-top: none;
+}
+
+.toolbar {
+  background: red;
+  padding: 0 10px;
+}
+
+#editor {
+  min-height: 200px;
+  resize: vertical;
+  outline: none;
+}
+
+
+#editorWrapper.maximized {
+  max-width: 96%;
+}
+
+.maximized {
+  width: 96%;
+  min-height: 100vh;
+  margin: auto;
+}
+
+.maximized textarea {
+  min-height: 95vh !important;
+  resize: none !important;
+}
+
+textarea {
+  padding: 15px;
+}
