@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import Toolbar from './components/Toolbar';
+import Wrapper from './components/Wrapper';
 import Markdown from './components/Markdown';
 import mdFilePath from './defaultText.md';
 import './App.css';
 
 function App() {
   const [value, setValue] = useState();
+  const [editorMaximized, setEditorMaximized] = useState(false);
+  const [previewMaximized, setPreviewMaximized] = useState(false);
+
 
   const handleChange = (e) => {
     setValue(e.target.value);
+  }
+
+  const handleEditorMaximize = () => {
+    setEditorMaximized(!editorMaximized);
+  }
+
+  const handlePreviewMaximize = () => {
+    setPreviewMaximized(!previewMaximized);
   }
 
   // import markdown and set as default text
@@ -21,19 +32,28 @@ function App() {
 
   return (
     <div className="App">
-      <div id="editorWrapper">
-        <Toolbar title="Editor" />
-        <textarea id="editor" value={value} onChange={handleChange} />
-      </div>
-
-      <div id="previewWrapper">
-        <Toolbar title="Previewer" />
+      <Wrapper 
+        title="editor"
+        handleMaximize={handleEditorMaximize}
+        maximized={editorMaximized}
+        hidden={previewMaximized ? true : false}>
+        <textarea 
+          id="editor" 
+          value={value} 
+          onChange={handleChange} />
+      </Wrapper>
+      
+      <Wrapper 
+        title="preview"
+        handleMaximize={handlePreviewMaximize}
+        maximized={previewMaximized}
+        hidden={editorMaximized ? true : false}>
         <div id="preview">
           <Markdown>
             {value}
           </Markdown>
         </div>
-      </div>
+      </Wrapper>
     </div>
   );
 }

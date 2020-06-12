@@ -10,6 +10,8 @@
   max-width: 800px;
   min-height: 200px;
   margin: 20px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 #editorWrapper textarea, #previewWrapper {
@@ -31,7 +33,7 @@
 }
 
 
-#editorWrapper.maximized {
+#editorWrapper.maximized, #previewWrapper.maximized {
   max-width: 96%;
 }
 
@@ -46,6 +48,14 @@
   resize: none !important;
 }
 
+.fa-compress:hover, .fa-expand-arrows-alt:hover {
+  cursor: pointer;
+}
+
 textarea {
   padding: 15px;
+}
+
+.hidden {
+  display: none !important;
 }

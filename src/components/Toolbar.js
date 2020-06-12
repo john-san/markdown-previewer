@@ -1,13 +1,20 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExpandArrowsAlt } from '@fortawesome/free-solid-svg-icons';
+import { faExpandArrowsAlt, faCompress } from '@fortawesome/free-solid-svg-icons';
 
-export default function Toolbar({title}) {
+export default function Toolbar({
+  title, 
+  handleMaximize, 
+  maximized}) {
+    
   return (
     <div className="toolbar">
-      <h4>{title}
-        <FontAwesomeIcon icon={faExpandArrowsAlt} pull="right" />
-      </h4>
+      <h3>{title}
+        <FontAwesomeIcon 
+          icon={ maximized ? faCompress : faExpandArrowsAlt} 
+          pull="right"
+          onClick={() => handleMaximize()} />
+      </h3>
     </div>
   )
 }
