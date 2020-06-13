@@ -1,9 +1,44 @@
+/* Variables */
+:root {
+  --main-bg-color: #006DAA;
+  --toolbar-bg-color: #0353A4;
+  --textbox-bg-color: #B9D6F2;
+  --icon-hover-color: #B9D6F2;
+}
+
+body {
+  background: var(--main-bg-color);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.toolbar {
+  background: var(--toolbar-bg-color);
+  padding: 0 10px;
+  color: #fff;
+}
+
 #editorWrapper {
-  background: blue;
   max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+#editor {
+  min-height: 200px;
+  resize: vertical;
+  outline: none;
+}
+
+#editorWrapper textarea {
+  background-color: var(--textbox-bg-color);
+}
+
+textarea, #preview {
+  padding: 15px;
 }
 
 #previewWrapper {
@@ -14,24 +49,12 @@
   flex-direction: column;
 }
 
-#editorWrapper textarea, #previewWrapper {
-  background-color: #c0d8d8;
-  border: 1px solid #1d2f2f;
-  box-shadow: 1px 1px 10px 2px #3a5f5f;
+#editorWrapper, #previewWrapper {
+  background-color: var(--textbox-bg-color);
+  border: 1px solid #000;
+  box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.5);
   border-top: none;
 }
-
-.toolbar {
-  background: red;
-  padding: 0 10px;
-}
-
-#editor {
-  min-height: 200px;
-  resize: vertical;
-  outline: none;
-}
-
 
 #editorWrapper.maximized, #previewWrapper.maximized {
   max-width: 96%;
@@ -50,12 +73,44 @@
 
 .fa-compress:hover, .fa-expand-arrows-alt:hover {
   cursor: pointer;
+  color: var(--icon-hover-color);
 }
 
-textarea {
-  padding: 15px;
+/* Markdown Styles */
+
+#preview h1 {
+  border-bottom: 2px solid #000;
 }
 
-.hidden {
-  display: none !important;
+#preview h2 {
+  border-bottom: 1px solid #000;
+}
+
+#preview code {
+  background: white;
+  padding: 1px 4px 2px 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#preview pre {
+  background: white;
+  padding: 5px 0 5px 5px;
+}
+
+#preview blockquote {
+  border-left: 3px solid #000;
+  color: #000;
+  padding-left: 5px;
+  margin-left: 25px;
+}
+
+#preview table {
+  border-collapse: collapse;
+}
+
+#preview td, #preview th {
+  border: 2px solid #000;
+  padding-left: 5px;
+  padding-right: 5px;
 }

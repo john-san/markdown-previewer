@@ -5,13 +5,15 @@ import mdFilePath from './defaultText.md';
 import './App.css';
 
 function App() {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [editorMaximized, setEditorMaximized] = useState(false);
   const [previewMaximized, setPreviewMaximized] = useState(false);
 
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    // necessary to get newLines on enter
+    const newLinedText = e.target.value.replace(/\n/g, '  \n'); 
+    setValue(newLinedText);
   }
 
   const handleEditorMaximize = () => {
@@ -22,7 +24,7 @@ function App() {
     setPreviewMaximized(!previewMaximized);
   }
 
-  // import markdown and set as default text
+  // import markdown and set as default text on initial load
   // https://stackoverflow.com/questions/42928530/how-do-i-load-a-markdown-file-into-a-react-component/51003410
   useEffect(() => {
     fetch(mdFilePath)
