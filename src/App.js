@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Wrapper from './components/Wrapper';
-import Markdown from './components/Markdown';
+import marked from 'marked';
+import DOMPurify from 'dompurify';
 import mdFilePath from './defaultText.md';
 import './App.css';
+
+// necessary for line breaks to insert <br>
+marked.setOptions({
+  breaks: true
+})
 
 function App() {
   const [value, setValue] = useState("");
   const [editorMaximized, setEditorMaximized] = useState(false);
   const [previewMaximized, setPreviewMaximized] = useState(false);
 
-
   const handleChange = (e) => {
-    // necessary to get newLines on enter
-    const newLinedText = e.target.value.replace(/\n/g, '  \n'); 
-    setValue(newLinedText);
+    setValue(e.target.value);
   }
 
   const handleEditorMaximize = () => {
@@ -24,12 +27,23 @@ function App() {
     setPreviewMaximized(!previewMaximized);
   }
 
+  // return markdown in sanitized html
+  const provideMarkdown = (string) => {
+    const markdown = marked(string);
+    const cleanedMarkdown = DOMPurify.sanitize(markdown);
+    return cleanedMarkdown;
+  }
+
   // import markdown and set as default text on initial load
   // https://stackoverflow.com/questions/42928530/how-do-i-load-a-markdown-file-into-a-react-component/51003410
   useEffect(() => {
-    fetch(mdFilePath)
-      .then(response => response.text())
-      .then(text => setValue(text))
+    async function fetchData() {
+      const res = await fetch(mdFilePath);
+      const defaultText = await res.text();
+      setValue(defaultText);
+    }
+
+    fetchData();
   }, [])
 
   return (
@@ -50,11 +64,9 @@ function App() {
         handleMaximize={handlePreviewMaximize}
         maximized={previewMaximized}
         hidden={editorMaximized ? true : false}>
-        <div id="preview">
-          <Markdown>
-            {value}
-          </Markdown>
-        </div>
+        <div 
+          id="preview" 
+          dangerouslySetInnerHTML={{__html: provideMarkdown(value)}} />
       </Wrapper>
     </div>
   );
