@@ -1,5 +1,5 @@
 # Welcome to my React Markdown Previewer!
-
+### Made by [John Nguyen](https://github.com/john-san)
 ## This is a sub-heading...
 ### And here's some other cool stuff:
   
